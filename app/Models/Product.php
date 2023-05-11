@@ -25,4 +25,36 @@ class Product extends Model
 
         return $product->id;
     }
+
+
+    protected static function getAllProducts()
+    {
+        return Product::all();
+    }
+
+    protected static function getProductById($id)
+    {
+        return Product::find($id);
+    }
+
+    protected static function updateProduct($data, $id)
+    {
+        $product = Product::find($id);
+
+        $product->productName = $data["productName"];
+        $product->price = $data["price"];
+        $product->stock = $data["stock"];
+        $product->longDescription = $data["longDescription"];
+        $product->expiry_date = $data["expiry_date"];
+
+        $product->save();
+
+        return true;
+    }
+
+    protected static function deleteProduct($id)
+    {
+        $product = Product::find($id);
+        $product->delete();
+    }
 }

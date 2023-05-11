@@ -8,6 +8,7 @@
     <title>Laravel CRUD - @yield('title')</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('logo.png') }}">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
@@ -15,7 +16,7 @@
     <!--  navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{{ url('/')}}">
                 <img src="{{ asset('logo.png') }}" alt="" width="30" height="24" class="d-inline-block align-text-top">
                 Laravel CRUD
             </a>
@@ -25,18 +26,28 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{{ url('/')}}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="create.html">Add Product</a>
+                        <a class="nav-link" href="{{ route('products.create') }}">Add Product</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="list.html">Products List</a>
+                        <a class="nav-link" href="{{ route('products.index') }}">Products List</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    @if(session('success'))
+    <div style="color: green; text-align: center;">
+        {{ session('success') }}
+    </div>
+    @else
+    <div style="color: maroon; text-align: center;">
+        {{ session('error') }}
+    </div>
+    @endif
 
     @yield('content')
 

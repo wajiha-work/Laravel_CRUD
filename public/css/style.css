@@ -1,0 +1,16 @@
+.action-icon
+{
+    background-color: transparent;
+    border: none;
+    color: #088e9a;
+}
+
+.action-icon:hover
+{
+    color: #747e86;
+}
+
+.icon-form
+{
+    display: inline;
+}

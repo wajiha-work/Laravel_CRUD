@@ -12,7 +12,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::getAllProducts();
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -32,7 +33,7 @@ class ProductController extends Controller
         // exit;
 
             Product::saveProduct($request->all());
-            return view('products.create');
+            return redirect('/products')->with('success', 'Product has been added!');
     }
 
     /**
@@ -40,7 +41,8 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::getProductById($id);
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -48,15 +50,16 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::getProductById($id);
+        return view('products.edit', compact('product'));
     }
-
     /**
      * Update the specified resource in storage. [U submit form]
      */
     public function update(Request $request, string $id)
     {
-        //
+        Product::updateProduct($request->all(), $id);
+        return redirect('/products')->with('success', 'Product has been updated!');
     }
 
     /**
@@ -64,6 +67,7 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Product::deleteProduct($id);
+        return redirect('/products')->with('success', 'Product has been deleted!');
     }
 }
